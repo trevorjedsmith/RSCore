@@ -10,6 +10,9 @@ using RSCore.Web.Models;
 using RSCore.Web.Services;
 
 using RSCore.Data;
+using RSCore.Models;
+using RSCore.Data.Abstract;
+using RSCore.Data.Concrete;
 using RSCore.Data.Migrations;
 
 namespace RSCore.Web
@@ -54,6 +57,10 @@ namespace RSCore.Web
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            //Scoped to request
+            services.AddScoped<IDbContext, RSCoreDbContext>();
+            services.AddScoped<IDbSession, DbSession>();
+            services.AddScoped(typeof(IEntityRepository<>), typeof(IEntityRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
