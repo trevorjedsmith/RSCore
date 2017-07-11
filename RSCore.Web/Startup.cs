@@ -10,7 +10,6 @@ using RSCore.Web.Models;
 using RSCore.Web.Services;
 
 using RSCore.Data;
-using RSCore.Models;
 using RSCore.Data.Abstract;
 using RSCore.Data.Concrete;
 using RSCore.Data.Migrations;
@@ -60,7 +59,7 @@ namespace RSCore.Web
             //Scoped to request
             services.AddScoped<IDbContext, RSCoreDbContext>();
             services.AddScoped<IDbSession, DbSession>();
-            services.AddScoped(typeof(IEntityRepository<>), typeof(IEntityRepository<>));
+            services.AddScoped(typeof(IEntityRepository<>), typeof(EntityRepository<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,7 +92,10 @@ namespace RSCore.Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            SeedData.EnsurePopulated(app);
+            if (env.IsDevelopment())
+            {
+                SeedData.EnsurePopulated(app);
+            }
         }
     }
 }
