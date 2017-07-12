@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using log4net;
 using System.Reflection;
 using System.IO;
+using RSCore.Models.Enums;
 
 namespace RSCore.Web.Models
 {
@@ -67,12 +66,5 @@ namespace RSCore.Web.Models
         }
     }
 
-    public enum LogLevel
-    {
-        DEBUG,
-        INFO,
-        WARN,
-        ERROR,
-        FATAL
-    }
+
 }

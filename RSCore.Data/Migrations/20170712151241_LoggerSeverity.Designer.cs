@@ -8,9 +8,10 @@ using RSCore.Data;
 namespace RSCore.Data.Migrations
 {
     [DbContext(typeof(RSCoreDbContext))]
-    partial class RSCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170712151241_LoggerSeverity")]
+    partial class LoggerSeverity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

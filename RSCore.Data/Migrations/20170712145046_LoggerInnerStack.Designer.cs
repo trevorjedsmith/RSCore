@@ -8,9 +8,10 @@ using RSCore.Data;
 namespace RSCore.Data.Migrations
 {
     [DbContext(typeof(RSCoreDbContext))]
-    partial class RSCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170712145046_LoggerInnerStack")]
+    partial class LoggerInnerStack
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -70,8 +71,6 @@ namespace RSCore.Data.Migrations
                     b.Property<string>("InnerStackTrace");
 
                     b.Property<DateTime>("LogDate");
-
-                    b.Property<string>("Severity");
 
                     b.Property<string>("StackTrace");
 

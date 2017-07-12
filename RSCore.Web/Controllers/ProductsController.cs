@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using RSCore.Data.Interfaces;
 using RSCore.Web.Models;
 using RSCore.Models;
-
+using RSCore.Web.Helpers.Abstract;
+using RSCore.Models.Enums;
 
 namespace RSCore.Web.Controllers
 {
@@ -13,10 +14,12 @@ namespace RSCore.Web.Controllers
     public class ProductsController : Controller
     {
         private IProductService _productService;
+        private IExceptionUtility _exceptionUtility;
 
-        public ProductsController(IProductService productService)
+        public ProductsController(IProductService productService, IExceptionUtility exceptionUtility)
         {
             _productService = productService;
+            _exceptionUtility = exceptionUtility;
         }
 
         // GET: api/Products
@@ -29,8 +32,7 @@ namespace RSCore.Web.Controllers
             }
             catch(Exception ex)
             {
-                //Log 
-                Log4NetHelper.Log(String.Format("There has been an exception {0}.", ex.Message), LogLevel.ERROR, "ProductsController", 0, User.Identity.Name, ex);
+                _exceptionUtility.LogException(ex, User.Identity.Name, LogLevel.ERROR);
                 return BadRequest(new { Error = ex.Message });
             }
         }
@@ -50,8 +52,7 @@ namespace RSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                //Log 
-                Log4NetHelper.Log(String.Format("There has been an exception {0}.", ex.Message), LogLevel.ERROR, "ProductsController", 0, User.Identity.Name, ex);
+                _exceptionUtility.LogException(ex, User.Identity.Name, LogLevel.ERROR);
                 return BadRequest(new { Error = ex.Message });
             }
         }
@@ -73,8 +74,7 @@ namespace RSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                //Log 
-                Log4NetHelper.Log(String.Format("There has been an exception {0}.", ex.Message), LogLevel.ERROR, "ProductsController", 0, User.Identity.Name, ex);
+                _exceptionUtility.LogException(ex, User.Identity.Name, LogLevel.ERROR);
                 return BadRequest(new { Error = ex.Message });
             }
 
@@ -102,8 +102,7 @@ namespace RSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                //Log 
-                Log4NetHelper.Log(String.Format("There has been an exception {0}.", ex.Message), LogLevel.ERROR, "ProductsController", 0, User.Identity.Name, ex);
+                _exceptionUtility.LogException(ex, User.Identity.Name, LogLevel.ERROR);
                 return BadRequest(new { Error = ex.Message });
             }
 
@@ -124,8 +123,7 @@ namespace RSCore.Web.Controllers
             }
             catch (Exception ex)
             {
-                //Log 
-                Log4NetHelper.Log(String.Format("There has been an exception {0}.", ex.Message), LogLevel.ERROR, "ProductsController", 0, User.Identity.Name, ex);
+                _exceptionUtility.LogException(ex, User.Identity.Name, LogLevel.ERROR);
                 return BadRequest(new { Error = ex.Message });
             }
         }

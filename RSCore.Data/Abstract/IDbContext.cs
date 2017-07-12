@@ -13,5 +13,7 @@ namespace RSCore.Data.Abstract
 
         DbSet<LogEntry> LogEntries { get; set; }
 
+        DbSet<Logger> Logger { get; set; }
+
     }
 }

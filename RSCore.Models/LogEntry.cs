@@ -12,6 +12,7 @@ namespace RSCore.Models
         [Display(Name = "Date")]
         [Required]
         public DateTime LogDate { get; set; }
+
         [Required]
         [MaxLength(30)]
         public string Logger { get; set; }
@@ -38,6 +39,7 @@ namespace RSCore.Models
         [Required]
         [MaxLength(256)]
         public string Message { get; set; }
+
         public string Exception { get; set; }
     }
 }
