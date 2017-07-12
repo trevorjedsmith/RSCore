@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using System.Reflection;
+using log4net;
 
 namespace RSCore.Web
 {
@@ -21,5 +23,8 @@ namespace RSCore.Web
 
             host.Run();
         }
+
+       
+
     }
 }

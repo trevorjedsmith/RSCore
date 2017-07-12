@@ -14,6 +14,8 @@ namespace RSCore.Data
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<LogEntry> LogEntries { get; set; }
+
         public DbSet<TEntity> GetDbSet<TEntity>() where TEntity : class
         {
             return Set<TEntity>();

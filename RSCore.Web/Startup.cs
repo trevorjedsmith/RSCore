@@ -13,6 +13,9 @@ using RSCore.Data;
 using RSCore.Data.Abstract;
 using RSCore.Data.Concrete;
 using RSCore.Data.Migrations;
+using RSCore.Data.Interfaces;
+using RSCore.Data.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace RSCore.Web
 {
@@ -56,6 +59,8 @@ namespace RSCore.Web
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<IProductService, ProductService>();
+
             //Scoped to request
             services.AddScoped<IDbContext, RSCoreDbContext>();
             services.AddScoped<IDbSession, DbSession>();

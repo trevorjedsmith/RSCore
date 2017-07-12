@@ -11,5 +11,7 @@ namespace RSCore.Data.Abstract
 
         DbSet<Product> Products { get; set; }
 
+        DbSet<LogEntry> LogEntries { get; set; }
+
     }
 }
