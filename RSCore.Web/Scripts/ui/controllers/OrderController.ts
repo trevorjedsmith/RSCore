@@ -1,11 +1,11 @@
-﻿namespace SportsStore {
+﻿namespace RSCore {
     export class OrderController {
 
         constructor() {
            
         }
 
-        PageLoad(vm: SportsStore.OrderViewModel) {       
+        PageLoad(vm: RSCore.OrderViewModel) {       
             ko.applyBindings(vm);
         }
     }

@@ -1,5 +1,5 @@
-var SportsStore;
-(function (SportsStore) {
+var RSCore;
+(function (RSCore) {
     class Constants {
     }
     //BaseServiceUrl can be swopped out at runtime
@@ -8,5 +8,5 @@ var SportsStore;
     Constants.BaseDeleteMethod = "DELETE";
     Constants.BasePOSTMethod = "POST";
     Constants.BasePUTMethod = "PUT";
-    SportsStore.Constants = Constants;
-})(SportsStore || (SportsStore = {}));
+    RSCore.Constants = Constants;
+})(RSCore || (RSCore = {}));

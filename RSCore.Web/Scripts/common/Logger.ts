@@ -2,7 +2,7 @@
 
 
 
-namespace SportsStore {
+namespace RSCore {
     export class Logger {
 
         constructor() {

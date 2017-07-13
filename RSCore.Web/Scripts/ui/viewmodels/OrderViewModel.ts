@@ -1,10 +1,10 @@
-﻿namespace SportsStore {
+﻿namespace RSCore {
 
-    import logger = SportsStore.Logger;
+    import logger = RSCore.Logger;
 
     export class OrderViewModel {
 
-        private dataServices: SportsStore.SportsStoreDataService<any>;
+        private dataServices: RSCoreDataService<any>;
 
         private logger: logger;
 
@@ -26,9 +26,9 @@
 
         private orderlines: KnockoutObservableArray<any>;
 
-        constructor(dataService: SportsStore.SportsStoreDataService<any>) {
+        constructor(dataService: RSCoreDataService<any>) {
             this.dataServices = dataService;
-            this.logger = new SportsStore.Logger();
+            this.logger = new RSCore.Logger();
 
             this.id = ko.observable(0);
             this.name = ko.observable('').extend({ required: true });
@@ -88,7 +88,7 @@
                 OrderLines: this.getOrderLines(this.orderlines())
             }
 
-            let ds = new SportsStore.SportsStoreDataService($, 'api/Orders/CreateOrder');
+            let ds = new RSCoreDataService($, 'api/Orders/CreateOrder');
             ds.ExecutePost(ds.baseUri, order).done((data: any) => {
                 console.log('Order Return');
                 console.log(data);
@@ -106,7 +106,7 @@
             //toggle modal()
             //call cart controller to clear cart
             //on success window.reload to start page
-            let ds = new SportsStore.SportsStoreDataService($, 'Carts/ClearAllCartItems');
+            let ds = new RSCoreDataService($, 'Carts/ClearAllCartItems');
             ds.ExecutePost(ds.baseUri, '').done((data: any) => {
                 //put an are you sure model here
                 window.location.href = "Cancelled";

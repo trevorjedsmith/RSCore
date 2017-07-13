@@ -1,5 +1,5 @@
-var SportsStore;
-(function (SportsStore) {
+var RSCore;
+(function (RSCore) {
     class OrderController {
         constructor() {
         }
@@ -7,5 +7,5 @@ var SportsStore;
             ko.applyBindings(vm);
         }
     }
-    SportsStore.OrderController = OrderController;
-})(SportsStore || (SportsStore = {}));
+    RSCore.OrderController = OrderController;
+})(RSCore || (RSCore = {}));

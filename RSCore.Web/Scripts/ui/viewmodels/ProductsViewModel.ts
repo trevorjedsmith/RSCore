@@ -1,10 +1,10 @@
-﻿namespace SportsStore {
+﻿namespace RSCore {
 
-    import logger = SportsStore.Logger;
+    import logger = RSCore.Logger;
 
     export class ProductsViewModel {
 
-        private dataServices: SportsStore.SportsStoreDataService<any>;
+        private dataServices: RSCoreDataService<any>;
 
         private logger: logger;
 
@@ -14,9 +14,9 @@
 
         private cartTotal: KnockoutObservable<number>;
 
-        constructor(dataService: SportsStore.SportsStoreDataService<any>) {
+        constructor(dataService: RSCoreDataService<any>) {
             this.dataServices = dataService;
-            this.logger = new SportsStore.Logger();
+            this.logger = new RSCore.Logger();
             this.productsList = ko.observableArray([]);
             this.categoriesList = ko.observableArray([]);
             this.cartList = ko.observableArray([]);
@@ -32,19 +32,21 @@
             this.dataServices.ExecuteGet(this.dataServices.baseUri).done((data) => {
                 this.applyProducts(data);
                 this.applyCategories(data);
+                //this is for dev only
                 this.logger.log(`${this.productsList().length} Products Loaded`, null, data, true);
                 this.logger.log(`${this.categoriesList().length} Categories Loaded`, null, data, true);
-                console.log(this.productsList());
             }).fail((error) => {
+                //this is for dev only
                 this.logger.logError(`Error: ${error}`, null, 'OnInt', true);
-            }).always(() => {
+                }).always(() => {
+                //this is for dev only
                 this.logger.log('Data loaded successfully', null, '', true);
                 this.hideModal();
             });
         }
 
         addToCart = (product: any) => {
-            let ds = new SportsStore.SportsStoreDataService($, 'Carts/AddToCart');
+            let ds = new RSCoreDataService($, 'Carts/AddToCart');
 
             var params = {
                 productId: product.ProductID
@@ -61,7 +63,7 @@
 
         setCategory = (data: any) => {
 
-            let ds = new SportsStore.SportsStoreDataService($, 'api/products/getAllProducts');
+            let ds = new RSCoreDataService($, 'api/products/getAllProducts');
 
             var params = {
                 Category: data

@@ -1,5 +1,5 @@
-var SportsStore;
-(function (SportsStore) {
+var RSCore;
+(function (RSCore) {
     class ProductsViewModel {
         constructor(dataService) {
             this.OnInit = () => {
@@ -21,7 +21,7 @@ var SportsStore;
                 });
             };
             this.addToCart = (product) => {
-                let ds = new SportsStore.SportsStoreDataService($, 'Carts/AddToCart');
+                let ds = new RSCore.RSCoreDataService($, 'Carts/AddToCart');
                 var params = {
                     productId: product.ProductID
                 };
@@ -34,7 +34,7 @@ var SportsStore;
                 });
             };
             this.setCategory = (data) => {
-                let ds = new SportsStore.SportsStoreDataService($, 'api/products/getAllProducts');
+                let ds = new RSCore.RSCoreDataService($, 'api/products/getAllProducts');
                 var params = {
                     Category: data
                 };
@@ -100,7 +100,7 @@ var SportsStore;
                 $('#busyindicator').fadeOut(1).modal('hide');
             };
             this.dataServices = dataService;
-            this.logger = new SportsStore.Logger();
+            this.logger = new RSCore.Logger();
             this.productsList = ko.observableArray([]);
             this.categoriesList = ko.observableArray([]);
             this.cartList = ko.observableArray([]);
@@ -108,5 +108,5 @@ var SportsStore;
             this.OnInit();
         }
     }
-    SportsStore.ProductsViewModel = ProductsViewModel;
-})(SportsStore || (SportsStore = {}));
+    RSCore.ProductsViewModel = ProductsViewModel;
+})(RSCore || (RSCore = {}));

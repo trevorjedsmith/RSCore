@@ -1,4 +1,4 @@
-﻿namespace SportsStore {
+﻿namespace RSCore {
 
     export class Constants {
         //BaseServiceUrl can be swopped out at runtime

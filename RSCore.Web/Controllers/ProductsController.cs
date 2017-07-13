@@ -2,13 +2,15 @@ using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using RSCore.Data.Interfaces;
-using RSCore.Web.Models;
 using RSCore.Models;
 using RSCore.Web.Helpers.Abstract;
 using RSCore.Models.Enums;
 
 namespace RSCore.Web.Controllers
 {
+    /// <summary>
+    /// ProductsController gets all ficticous products
+    /// </summary>
     [Produces("application/json")]
     [Route("api/Products")]
     public class ProductsController : Controller
@@ -16,6 +18,11 @@ namespace RSCore.Web.Controllers
         private IProductService _productService;
         private IExceptionUtility _exceptionUtility;
 
+        /// <summary>
+        /// ProductsController constuctor
+        /// </summary>
+        /// <param name="productService"></param>
+        /// <param name="exceptionUtility"></param>
         public ProductsController(IProductService productService, IExceptionUtility exceptionUtility)
         {
             _productService = productService;
@@ -23,6 +30,10 @@ namespace RSCore.Web.Controllers
         }
 
         // GET: api/Products
+        /// <summary>
+        /// get all products from repository
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -33,17 +44,22 @@ namespace RSCore.Web.Controllers
             catch(Exception ex)
             {
                 _exceptionUtility.LogException(ex, User.Identity.Name, LogLevel.ERROR);
-                return BadRequest(new { Error = ex.Message });
+                return StatusCode(500, "A problem occured while handling your request.");
             }
         }
 
         // GET: api/Products/5
-        [HttpGet("{id}", Name = "Get")]
-        public IActionResult Get(int id)
+        /// <summary>
+        /// get a product with id from repository
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        [HttpGet("{productId}", Name = "Get")]
+        public IActionResult Get(int productId)
         {
             try
             {
-                var product = _productService.GetProduct(id);
+                var product = _productService.GetProduct(productId);
 
                 if (product == null)
                     return NotFound();
@@ -53,12 +69,17 @@ namespace RSCore.Web.Controllers
             catch (Exception ex)
             {
                 _exceptionUtility.LogException(ex, User.Identity.Name, LogLevel.ERROR);
-                return BadRequest(new { Error = ex.Message });
+                return StatusCode(500, "A problem occured while handling your request.");
             }
         }
         
         // POST: api/Products
-        [HttpPost]
+        /// <summary>
+        /// add product to repository
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        [HttpPost("",Name = "CreateProduct")]
         public IActionResult Post([FromBody]Product product)
         {
             if (!ModelState.IsValid)
@@ -70,26 +91,32 @@ namespace RSCore.Web.Controllers
             {
                 _productService.Add(product);
                 _productService.SaveChanges();
-                return Created(string.Format("api/products/{0}", product.ProductID), product);
+                return CreatedAtRoute("CreateProduct", new { id = product.ProductID }, product);
             }
             catch (Exception ex)
             {
                 _exceptionUtility.LogException(ex, User.Identity.Name, LogLevel.ERROR);
-                return BadRequest(new { Error = ex.Message });
+                return StatusCode(500, "A problem occured while handling your request.");
             }
 
         }
-        
+
         // PUT: api/Products/5
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody]Product product)
+        /// <summary>
+        /// update product in repository
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <param name="product"></param>
+        /// <returns></returns>
+        [HttpPut("{productId}")]
+        public IActionResult Put(int productId, [FromBody]Product product)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if(id != product.ProductID)
+            if(productId != product.ProductID)
             {
                 return BadRequest(new { Error = "Product Id has been altered" });
             }
@@ -98,33 +125,40 @@ namespace RSCore.Web.Controllers
             {
                 _productService.Update(product);
                 _productService.SaveChanges();
-                return Ok();
+                return Ok(product);
             }
             catch (Exception ex)
             {
                 _exceptionUtility.LogException(ex, User.Identity.Name, LogLevel.ERROR);
-                return BadRequest(new { Error = ex.Message });
+                return StatusCode(500, "A problem occured while handling your request.");
             }
 
         }
-        
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+
+        // DELETE: api/Products/5
+        /// <summary>
+        /// delete product from repository
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        [HttpDelete("{productId}")]
+        public IActionResult Delete(int productId)
         {
             try
             {
-                var product = _productService.GetProduct(id);
+                var product = _productService.GetProduct(productId);
 
                 if (product == null)
                     return NotFound();
 
-                return Ok();
+                _productService.Delete(product);
+                _productService.SaveChanges();
+                return NoContent();
             }
             catch (Exception ex)
             {
                 _exceptionUtility.LogException(ex, User.Identity.Name, LogLevel.ERROR);
-                return BadRequest(new { Error = ex.Message });
+                return StatusCode(500, "A problem occured while handling your request.");
             }
         }
     }

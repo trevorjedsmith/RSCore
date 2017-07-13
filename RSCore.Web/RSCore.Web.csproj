@@ -11,6 +11,26 @@
   <PropertyGroup>
     <UserSecretsId>aspnet-RSCore.Web-b7bc76db-cf66-481b-9ca9-c0f2eb667631</UserSecretsId>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>RSCore.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\frontshop\css\bootstrap.css" />
+    <Content Include="wwwroot\frontshop\css\bootstrap.min.css" />
+    <Content Include="wwwroot\frontshop\css\scrolling-nav.css" />
+    <Content Include="wwwroot\frontshop\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="wwwroot\frontshop\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="wwwroot\frontshop\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="wwwroot\frontshop\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="wwwroot\frontshop\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="wwwroot\frontshop\js\bootstrap.js" />
+    <Content Include="wwwroot\frontshop\js\bootstrap.min.js" />
+    <Content Include="wwwroot\frontshop\js\jquery.easing.min.js" />
+    <Content Include="wwwroot\frontshop\js\jquery.js" />
+    <Content Include="wwwroot\frontshop\js\scrolling-nav.js" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
@@ -27,6 +47,10 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="1.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="1.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />
@@ -36,5 +60,8 @@
   <ItemGroup>
     <ProjectReference Include="..\RSCore.Data\RSCore.Data.csproj" />
     <ProjectReference Include="..\RSCore.Models\RSCore.Models.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Home\" />
   </ItemGroup>
 </Project>

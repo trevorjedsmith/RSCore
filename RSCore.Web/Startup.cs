@@ -18,6 +18,9 @@ using RSCore.Data.Services;
 using Microsoft.AspNetCore.Http;
 using RSCore.Web.Helpers.Abstract;
 using RSCore.Web.Helpers;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.PlatformAbstractions;
+using System.IO;
 
 namespace RSCore.Web
 {
@@ -68,16 +71,31 @@ namespace RSCore.Web
             services.AddScoped<IDbContext, RSCoreDbContext>();
             services.AddScoped<IDbSession, DbSession>();
             services.AddScoped(typeof(IEntityRepository<>), typeof(EntityRepository<>));
+
+            //Swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                { Title = "RSCore Api",
+                  Version = "v1.00",
+                  Description = "This is a .Net Core Api"
+                });
+
+                //Set the comments path for the swagger json and ui.
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var xmlPath = Path.Combine(basePath, "RSCore.xml");
+                c.IncludeXmlComments(xmlPath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));        
 
             if (env.IsDevelopment())
             {
+                loggerFactory.AddDebug(LogLevel.Error);
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
@@ -98,6 +116,15 @@ namespace RSCore.Web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "RSCore Api V1");
             });
 
             if (env.IsDevelopment())

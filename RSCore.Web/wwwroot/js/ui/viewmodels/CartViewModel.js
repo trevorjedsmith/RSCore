@@ -1,5 +1,5 @@
-var SportsStore;
-(function (SportsStore) {
+var RSCore;
+(function (RSCore) {
     class CartViewModel {
         constructor(dataService) {
             this.OnInit = () => {
@@ -16,7 +16,7 @@ var SportsStore;
                 });
             };
             this.removeItem = (object) => {
-                let ds = new SportsStore.SportsStoreDataService($, 'Carts/RemoveFromCart');
+                let ds = new RSCore.RSCoreDataService($, 'Carts/RemoveFromCart');
                 var params = {
                     productId: object.Product.ProductID || 0
                 };
@@ -47,11 +47,11 @@ var SportsStore;
                 $('#busyindicator').fadeOut(1).modal('hide');
             };
             this.dataServices = dataService;
-            this.logger = new SportsStore.Logger();
+            this.logger = new RSCore.Logger();
             this.cartList = ko.observableArray();
             this.cartTotal = ko.observable(0);
             this.OnInit();
         }
     }
-    SportsStore.CartViewModel = CartViewModel;
-})(SportsStore || (SportsStore = {}));
+    RSCore.CartViewModel = CartViewModel;
+})(RSCore || (RSCore = {}));

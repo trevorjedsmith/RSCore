@@ -1,13 +1,13 @@
-var SportsStore;
-(function (SportsStore) {
+var RSCore;
+(function (RSCore) {
     class CartController {
         constructor() {
-            this.dataService = new SportsStore.SportsStoreDataService($, 'Carts/GetAllItems');
+            this.dataService = new RSCore.RSCoreDataService($, 'Carts/GetAllItems');
         }
         PageLoad(model) {
-            let viewModel = new SportsStore.CartViewModel(this.dataService);
+            let viewModel = new RSCore.CartViewModel(this.dataService);
             ko.applyBindings(viewModel);
         }
     }
-    SportsStore.CartController = CartController;
-})(SportsStore || (SportsStore = {}));
+    RSCore.CartController = CartController;
+})(RSCore || (RSCore = {}));

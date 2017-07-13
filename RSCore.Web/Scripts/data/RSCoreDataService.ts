@@ -1,8 +1,8 @@
 ﻿/// <reference path="../../typings/globals/jquery/index.d.ts" />
 
 
-namespace SportsStore {
-    export class SportsStoreDataService<T>{
+namespace RSCore {
+    export class RSCoreDataService<T>{
 
         ajaxService: JQueryStatic;
 

@@ -1,19 +1,19 @@
-﻿namespace SportsStore {
+﻿namespace RSCore {
 
-    import logger = SportsStore.Logger;
+    import logger = RSCore.Logger;
 
     export class CartViewModel {
 
-        private dataServices: SportsStore.SportsStoreDataService<any>;
+        private dataServices: RSCoreDataService<any>;
 
         private logger: logger;
 
         private cartList: KnockoutObservableArray<any>;
         private cartTotal: KnockoutObservable<number>;
 
-        constructor(dataService: SportsStore.SportsStoreDataService<any>) {
+        constructor(dataService: RSCoreDataService<any>) {
             this.dataServices = dataService;
-            this.logger = new SportsStore.Logger();
+            this.logger = new RSCore.Logger();
             this.cartList = ko.observableArray();
             this.cartTotal = ko.observable(0);
             this.OnInit();
@@ -35,7 +35,7 @@
 
         removeItem = (object: any) => {
 
-            let ds = new SportsStore.SportsStoreDataService($, 'Carts/RemoveFromCart');
+            let ds = new RSCoreDataService($, 'Carts/RemoveFromCart');
 
             var params = {
                 productId: object.Product.ProductID || 0

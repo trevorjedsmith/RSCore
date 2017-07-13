@@ -1,6 +1,6 @@
 /// <reference path="../../typings/globals/toastr/index.d.ts" />
-var SportsStore;
-(function (SportsStore) {
+var RSCore;
+(function (RSCore) {
     class Logger {
         constructor() {
             toastr.options = {
@@ -45,5 +45,5 @@ var SportsStore;
             }
         }
     }
-    SportsStore.Logger = Logger;
-})(SportsStore || (SportsStore = {}));
+    RSCore.Logger = Logger;
+})(RSCore || (RSCore = {}));

@@ -1,5 +1,5 @@
-var SportsStore;
-(function (SportsStore) {
+var RSCore;
+(function (RSCore) {
     class OrderViewModel {
         constructor(dataService) {
             this.OnInit = () => {
@@ -37,7 +37,7 @@ var SportsStore;
                     GiftWrap: this.giftwrap(),
                     OrderLines: this.getOrderLines(this.orderlines())
                 };
-                let ds = new SportsStore.SportsStoreDataService($, 'api/Orders/CreateOrder');
+                let ds = new RSCore.RSCoreDataService($, 'api/Orders/CreateOrder');
                 ds.ExecutePost(ds.baseUri, order).done((data) => {
                     console.log('Order Return');
                     console.log(data);
@@ -53,7 +53,7 @@ var SportsStore;
                 //toggle modal()
                 //call cart controller to clear cart
                 //on success window.reload to start page
-                let ds = new SportsStore.SportsStoreDataService($, 'Carts/ClearAllCartItems');
+                let ds = new RSCore.RSCoreDataService($, 'Carts/ClearAllCartItems');
                 ds.ExecutePost(ds.baseUri, '').done((data) => {
                     //put an are you sure model here
                     window.location.href = "Cancelled";
@@ -85,7 +85,7 @@ var SportsStore;
                 $('#busyindicator').fadeOut(1).modal('hide');
             };
             this.dataServices = dataService;
-            this.logger = new SportsStore.Logger();
+            this.logger = new RSCore.Logger();
             this.id = ko.observable(0);
             this.name = ko.observable('').extend({ required: true });
             this.line1 = ko.observable('');
@@ -100,5 +100,5 @@ var SportsStore;
             this.OnInit();
         }
     }
-    SportsStore.OrderViewModel = OrderViewModel;
-})(SportsStore || (SportsStore = {}));
+    RSCore.OrderViewModel = OrderViewModel;
+})(RSCore || (RSCore = {}));
